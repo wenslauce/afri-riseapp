@@ -154,7 +154,7 @@ export default function ModernRegistrationForm() {
     setIsLoading(true)
 
     try {
-      const result = await signUp(
+      await signUp(
         formData.email,
         formData.password,
         {
@@ -166,19 +166,7 @@ export default function ModernRegistrationForm() {
         }
       )
       
-      if (result.error) {
-        if (result.error.includes('email')) {
-          setStep(1)
-          setErrors({ email: result.error })
-        } else {
-          setErrors({ country_id: result.error })
-        }
-        return
-      }
-
-      if (result.user) {
-        router.push('/auth/confirm-email')
-      }
+      router.push('/auth/confirm-email')
     } catch (error) {
       console.error('Registration error:', error)
       setErrors({ country_id: 'An unexpected error occurred' })
