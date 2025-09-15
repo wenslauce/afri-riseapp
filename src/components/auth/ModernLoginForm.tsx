@@ -62,17 +62,9 @@ export default function ModernLoginForm() {
     setIsLoading(true)
 
     try {
-      const result = await signIn(formData.email, formData.password)
-      
-      if (result.error) {
-        setErrors({ email: result.error })
-        return
-      }
-
-      if (result.user) {
-        router.push('/')
-        router.refresh() // Refresh to trigger re-authentication check
-      }
+      await signIn(formData.email, formData.password)
+      router.push('/')
+      router.refresh() // Refresh to trigger re-authentication check
     } catch (error) {
       console.error('Login error:', error)
       setErrors({ email: 'An unexpected error occurred' })
