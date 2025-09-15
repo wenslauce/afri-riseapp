@@ -123,9 +123,7 @@ export default function ModernApplicationForm({ user, userProfile }: ModernAppli
     const saveTimer = setTimeout(async () => {
       setAutoSaveStatus('saving')
       try {
-        await updateApplication(draftApplication.id, {
-          application_data: formData
-        })
+        await updateApplication(draftApplication.id, formData)
         setAutoSaveStatus('saved')
         setTimeout(() => setAutoSaveStatus('idle'), 2000)
       } catch (error) {
