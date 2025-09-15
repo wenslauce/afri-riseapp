@@ -25,7 +25,7 @@ export default function ConfirmEmailPage() {
             </div>
             <div className="ml-3">
               <h3 className="text-sm font-medium text-blue-800">
-                What's next?
+                what&apos;s next?
               </h3>
               <div className="mt-2 text-sm text-blue-700">
                 <ul className="list-disc list-inside space-y-1">

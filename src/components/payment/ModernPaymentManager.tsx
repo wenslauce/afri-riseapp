@@ -226,7 +226,7 @@ export default function ModernPaymentManager({
               <div>
                 <h3 className="text-lg font-semibold">Payment Verification</h3>
                 <p className="text-muted-foreground">
-                  We're verifying your payment status. This may take a few minutes.
+                  We&apos;re verifying your payment status. This may take a few minutes.
                 </p>
               </div>
               <Button 

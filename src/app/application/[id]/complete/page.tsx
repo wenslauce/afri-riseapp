@@ -70,7 +70,7 @@ export default async function CompletePage({ params }: CompletePageProps) {
                         <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                       </svg>
                     </span>
-                    You'll receive email updates on your application status
+                    You&apos;ll receive email updates on your application status
                   </li>
                   <li className="flex items-start">
                     <span className="flex-shrink-0 h-5 w-5 text-blue-600 mt-0.5 mr-3">
@@ -86,7 +86,7 @@ export default async function CompletePage({ params }: CompletePageProps) {
                         <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                       </svg>
                     </span>
-                    Upon approval, we'll schedule a call to discuss loan terms
+                    Upon approval, we&apos;ll schedule a call to discuss loan terms
                   </li>
                 </ul>
               </div>

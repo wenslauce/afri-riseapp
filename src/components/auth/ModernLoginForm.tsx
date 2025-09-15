@@ -158,7 +158,7 @@ export default function ModernLoginForm() {
 
       {/* Alternative Actions */}
       <div className="text-center text-sm">
-        <span className="text-muted-foreground">Don't have an account? </span>
+        <span className="text-muted-foreground">don&apos;t have an account? </span>
         <Button
           type="button"
           variant="link"

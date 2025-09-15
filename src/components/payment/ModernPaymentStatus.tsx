@@ -56,7 +56,7 @@ export default function ModernPaymentStatus({
     try {
       setIsDownloading(true)
       // Here you would implement receipt download functionality
-      // For now, we'll simulate the download
+      // For now, we&apos;ll simulate the download
       await new Promise(resolve => setTimeout(resolve, 1000))
       
       // Create a simple receipt text
@@ -128,7 +128,7 @@ Thank you for your payment!
               <div className="text-center">
                 <h3 className="text-lg font-semibold text-orange-800">Payment Pending</h3>
                 <p className="text-orange-700">
-                  We're still processing your payment
+                  We&apos;re still processing your payment
                 </p>
               </div>
             </div>

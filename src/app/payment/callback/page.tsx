@@ -49,7 +49,7 @@ export default function PaymentCallbackPage() {
           setStatus('cancelled')
           setMessage('Payment was cancelled. You can try again when ready.')
         } else {
-          // For pending or unknown status, we'll show loading and redirect to dashboard
+          // For pending or unknown status, we&apos;ll show loading and redirect to dashboard
           setStatus('success')
           setMessage('Payment is being processed. Please check your dashboard for updates.')
         }

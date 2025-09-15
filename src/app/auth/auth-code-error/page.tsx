@@ -12,7 +12,7 @@ export default function AuthCodeErrorPage() {
             Authentication Error
           </h2>
           <p className="mt-2 text-sm text-gray-600">
-            Sorry, we couldn't verify your email. The confirmation link may have expired or is invalid.
+            Sorry, we couldn&apos;t verify your email. The confirmation link may have expired or is invalid.
           </p>
         </div>
         

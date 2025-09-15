@@ -272,7 +272,7 @@ export default function ModernApplicationProgressCard({
                   Congratulations!
                 </div>
                 <div className="text-emerald-600 dark:text-emerald-300 text-sm">
-                  Your application has been approved. We'll be in touch soon.
+                  Your application has been approved. we&apos;ll be in touch soon.
                 </div>
               </div>
             </div>
