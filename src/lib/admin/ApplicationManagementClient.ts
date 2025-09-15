@@ -79,7 +79,7 @@ export class ApplicationManagementClient {
    */
   async updateApplicationStatus(
     id: string, 
-    status: 'pending' | 'under_review' | 'approved' | 'rejected' | 'completed',
+    status: 'draft' | 'submitted' | 'under_review' | 'approved' | 'rejected',
     notes?: string
   ): Promise<{ success: boolean; error?: string }> {
     try {
