@@ -271,6 +271,7 @@ export default function ModernDocumentUploadManager({
             <DocumentList
               documents={documents}
               onDocumentDeleted={handleDocumentDeleted}
+              isLoading={isLoading}
             />
           </CardContent>
         </Card>
