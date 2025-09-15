@@ -132,13 +132,6 @@ export default function ApplicationFeeManager() {
                           }`}>
                             {fee.is_active ? 'Active' : 'Inactive'}
                           </span>
-                          <span className={`px-2 py-1 text-xs font-medium rounded-full ${
-                            fee.payment_mode === 'live'
-                              ? 'bg-blue-100 text-blue-800' 
-                              : 'bg-yellow-100 text-yellow-800'
-                          }`}>
-                            {fee.payment_mode === 'live' ? 'Live' : 'Test'}
-                          </span>
                         </div>
                       </div>
                       <p className="text-xs text-gray-500 mt-2">
