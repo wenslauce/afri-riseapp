@@ -1,18 +1,19 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, use } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { CheckCircle, AlertCircle, Loader2, ArrowRight } from 'lucide-react'
 
 interface PaymentCallbackPageProps {
-  params: {
+  params: Promise<{
     id: string
-  }
+  }>
 }
 
 export default function PaymentCallbackPage({ params }: PaymentCallbackPageProps) {
+  const { id } = use(params)
   const router = useRouter()
   const searchParams = useSearchParams()
   const [status, setStatus] = useState<'loading' | 'success' | 'error'>('loading')
@@ -64,7 +65,7 @@ export default function PaymentCallbackPage({ params }: PaymentCallbackPageProps
     }
 
     handlePaymentCallback()
-  }, [searchParams, router, params.id])
+  }, [searchParams, router, id])
 
   // Countdown and redirect logic
   useEffect(() => {
@@ -74,9 +75,9 @@ export default function PaymentCallbackPage({ params }: PaymentCallbackPageProps
           if (prev <= 1) {
             clearInterval(timer)
             if (status === 'success') {
-              router.push(`/application/${params.id}/complete`)
+              router.push(`/application/${id}/complete`)
             } else {
-              router.push(`/application/${params.id}/payment`)
+              router.push(`/application/${id}/payment`)
             }
             return 0
           }
@@ -86,13 +87,13 @@ export default function PaymentCallbackPage({ params }: PaymentCallbackPageProps
 
       return () => clearInterval(timer)
     }
-  }, [status, router, params.id])
+  }, [status, router, id])
 
   const handleManualRedirect = () => {
     if (status === 'success') {
-      router.push(`/application/${params.id}/complete`)
+      router.push(`/application/${id}/complete`)
     } else {
-      router.push(`/application/${params.id}/payment`)
+      router.push(`/application/${id}/payment`)
     }
   }
 
