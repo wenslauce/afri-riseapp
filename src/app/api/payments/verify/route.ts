@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { paymentService } from '@/lib/payments/PaymentService'
-import { updatePaymentRecord } from '@/lib/database-client'
+import { updatePaymentRecordByReference } from '@/lib/database-client'
 
 export async function POST(request: NextRequest) {
   try {
@@ -19,10 +19,9 @@ export async function POST(request: NextRequest) {
     if (paymentStatus.status === 'completed') {
       // Update payment record in database
       try {
-        await updatePaymentRecord(reference, {
+        await updatePaymentRecordByReference(reference, {
           status: 'completed',
-          gateway_response: paymentStatus,
-          updated_at: new Date().toISOString()
+          gateway_response: paymentStatus
         })
       } catch (error) {
         console.error('Failed to update payment record:', error)
