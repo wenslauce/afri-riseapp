@@ -81,11 +81,11 @@ export default function ModernMainDashboard({
 
   const getApplicationProgress = (application: Application) => {
     const steps = [
-      { key: 'application', name: 'Application Form', completed: true },
-      { key: 'documents', name: 'Document Upload', completed: false },
-      { key: 'payment', name: 'Fee Payment', completed: false },
-      { key: 'nda', name: 'NDA Signing', completed: false },
-      { key: 'review', name: 'Under Review', completed: false }
+      { key: 'application', name: 'Application Form', completed: true, description: 'Form completed' },
+      { key: 'documents', name: 'Document Upload', completed: false, description: 'Files uploaded' },
+      { key: 'payment', name: 'Fee Payment', completed: false, description: 'Fee paid' },
+      { key: 'nda', name: 'NDA Signing', completed: false, description: 'Agreement signed' },
+      { key: 'review', name: 'Under Review', completed: false, description: 'Under review' }
     ]
 
     // Check document upload
