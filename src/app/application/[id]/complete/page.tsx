@@ -5,9 +5,9 @@ import SignatureVerification from '@/components/nda/SignatureVerification'
 import Link from 'next/link'
 
 interface CompletePageProps {
-  params: {
+  params: Promise<{
     id: string
-  }
+  }>
 }
 
 export default async function CompletePage({ params }: CompletePageProps) {

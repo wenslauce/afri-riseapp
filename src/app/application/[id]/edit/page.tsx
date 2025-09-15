@@ -4,9 +4,9 @@ import { notFound } from 'next/navigation'
 import ModernEditApplicationForm from '@/components/application/ModernEditApplicationForm'
 
 interface EditApplicationPageProps {
-  params: {
+  params: Promise<{
     id: string
-  }
+  }>
 }
 
 export default async function EditApplicationPage({ params }: EditApplicationPageProps) {

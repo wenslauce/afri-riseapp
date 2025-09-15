@@ -4,9 +4,9 @@ import { notFound } from 'next/navigation'
 import ApplicationView from '@/components/application/ApplicationView'
 
 interface ApplicationPageProps {
-  params: {
+  params: Promise<{
     id: string
-  }
+  }>
 }
 
 export default async function ApplicationPage({ params }: ApplicationPageProps) {

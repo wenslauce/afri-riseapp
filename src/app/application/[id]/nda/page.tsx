@@ -4,9 +4,9 @@ import { notFound, redirect } from 'next/navigation'
 import NDASigningManager from '@/components/nda/NDASigningManager'
 
 interface NDAPageProps {
-  params: {
+  params: Promise<{
     id: string
-  }
+  }>
 }
 
 export default async function NDAPage({ params }: NDAPageProps) {

@@ -4,9 +4,9 @@ import { notFound } from 'next/navigation'
 import ModernPaymentManager from '@/components/payment/ModernPaymentManager'
 
 interface PaymentPageProps {
-  params: {
+  params: Promise<{
     id: string
-  }
+  }>
 }
 
 export default async function PaymentPage({ params }: PaymentPageProps) {

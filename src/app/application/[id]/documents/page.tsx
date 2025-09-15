@@ -4,9 +4,9 @@ import { notFound } from 'next/navigation'
 import ModernDocumentUploadManager from '@/components/documents/ModernDocumentUploadManager'
 
 interface DocumentsPageProps {
-  params: {
+  params: Promise<{
     id: string
-  }
+  }>
 }
 
 export default async function DocumentsPage({ params }: DocumentsPageProps) {
