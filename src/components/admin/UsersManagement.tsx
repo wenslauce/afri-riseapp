@@ -37,6 +37,7 @@ interface UsersResponse {
   page: number
   limit: number
   totalPages: number
+  error?: string
 }
 
 export default function UsersManagement() {
