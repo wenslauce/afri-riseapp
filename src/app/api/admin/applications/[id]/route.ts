@@ -4,8 +4,9 @@ import { applicationManagementService } from '@/lib/admin/ApplicationManagement'
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await params
   try {
     const admin = await adminAuthService.getCurrentAdmin()
     if (!admin) {
@@ -15,7 +16,7 @@ export async function GET(
       )
     }
 
-    const application = await applicationManagementService.getApplicationById(admin, params.id)
+    const application = await applicationManagementService.getApplicationById(admin, id)
     
     if (!application) {
       return NextResponse.json(

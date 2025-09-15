@@ -4,8 +4,9 @@ import { applicationManagementService } from '@/lib/admin/ApplicationManagement'
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await params
   try {
     const admin = await adminAuthService.getCurrentAdmin()
     if (!admin) {
@@ -27,7 +28,7 @@ export async function PUT(
 
     const result = await applicationManagementService.updateApplicationStatus(
       admin,
-      params.id,
+      id,
       { status, reason, admin_notes }
     )
 

@@ -4,8 +4,9 @@ import { applicationManagementService } from '@/lib/admin/ApplicationManagement'
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await params
   try {
     const admin = await adminAuthService.getCurrentAdmin()
     if (!admin) {
@@ -27,7 +28,7 @@ export async function POST(
 
     const result = await applicationManagementService.addApplicationNote(
       admin,
-      params.id,
+      id,
       { note, note_type: 'info' }
     )
 
@@ -53,8 +54,9 @@ export async function POST(
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await params
   try {
     const admin = await adminAuthService.getCurrentAdmin()
     if (!admin) {
@@ -64,7 +66,7 @@ export async function GET(
       )
     }
 
-    const notes = await applicationManagementService.getApplicationNotes(params.id)
+    const notes = await applicationManagementService.getApplicationNotes(id)
 
     return NextResponse.json({
       success: true,
