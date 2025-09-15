@@ -174,7 +174,6 @@ export default function ModernApplicationForm({ user, userProfile }: ModernAppli
     try {
       const application = await createApplication({
         user_id: user.id,
-        country_id: userProfile.country_id,
         application_data: data,
         status: 'draft'
       })
