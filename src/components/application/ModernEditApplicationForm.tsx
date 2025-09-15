@@ -77,10 +77,7 @@ export default function ModernEditApplicationForm({
     setSaveStatus('saving')
     
     try {
-      await updateApplication(application.id, {
-        application_data: data,
-        updated_at: new Date().toISOString()
-      })
+      await updateApplication(application.id, data)
 
       setSaveStatus('saved')
       setTimeout(() => setSaveStatus('idle'), 3000)
