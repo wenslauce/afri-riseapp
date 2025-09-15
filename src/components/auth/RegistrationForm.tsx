@@ -112,11 +112,7 @@ export default function RegistrationForm({ countries }: RegistrationFormProps) {
     
     try {
       // Create auth user
-      const { user, error: signUpError } = await signUp(formData.email, formData.password)
-      
-      if (signUpError) {
-        throw signUpError
-      }
+      const { user } = await signUp(formData.email, formData.password)
       
       if (user) {
         // Create user profile via API endpoint
