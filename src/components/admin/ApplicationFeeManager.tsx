@@ -33,7 +33,7 @@ export default function ApplicationFeeManager() {
     setEditingFee(fee)
     setNewAmount(fee.amount_usd.toString())
     setNewDescription(fee.description || '')
-    setNewPaymentMode(fee.payment_mode as 'test' | 'live' || 'test')
+    setNewPaymentMode('test') // Default to test mode
   }
 
   const handleUpdateFee = async () => {
