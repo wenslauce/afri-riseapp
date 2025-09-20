@@ -107,7 +107,7 @@ export default function ModernPaymentForm({
   // Update conversion info when currency changes
   useEffect(() => {
     const updateConversionInfo = async () => {
-      if (watchedValues.payment_currency === 'USD') {
+      if ((watchedValues.payment_currency || currency || 'USD') === 'USD') {
         try {
           const conversion = await CurrencyService.convertCurrency({
             amount: amount,
@@ -130,7 +130,7 @@ export default function ModernPaymentForm({
     }
     
     updateConversionInfo()
-  }, [watchedValues.payment_currency, amount])
+  }, [watchedValues.payment_currency, currency, amount])
 
   // Initialize Pesapal payment
   const initializePesapalPayment = async (data: PaymentFormData, reference: string) => {
@@ -143,7 +143,7 @@ export default function ModernPaymentForm({
         body: JSON.stringify({
           gateway: 'pesapal',
           amount: conversionInfo?.convertedAmount || amount,
-          currency: conversionInfo ? 'KES' : (watchedValues.payment_currency || currency),
+          currency: conversionInfo ? 'KES' : (watchedValues.payment_currency || currency || 'USD'),
           description: 'Application Fee Payment',
           reference: reference,
           customerEmail: data.email,
@@ -189,8 +189,8 @@ export default function ModernPaymentForm({
   const { initializePayment: initializePaystackPayment } = usePaystack({
     publicKey: process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY || '',
     email: watchedValues.email,
-    amount: convertToLowestUnit(conversionInfo?.convertedAmount || amount, conversionInfo ? 'KES' : (watchedValues.payment_currency || currency)),
-    currency: conversionInfo ? 'KES' : (watchedValues.payment_currency || currency),
+    amount: convertToLowestUnit(conversionInfo?.convertedAmount || amount, conversionInfo ? 'KES' : (watchedValues.payment_currency || currency || 'USD')),
+    currency: conversionInfo ? 'KES' : (watchedValues.payment_currency || currency || 'USD'),
     reference: paymentReference,
     metadata: {
       application_id: application.id,
@@ -264,7 +264,7 @@ export default function ModernPaymentForm({
           gateway_transaction_id: paymentReference,
           gateway_reference: paymentReference,
           amount: conversionInfo?.convertedAmount || amount,
-          currency: conversionInfo ? 'KES' : (watchedValues.payment_currency || currency),
+          currency: conversionInfo ? 'KES' : (watchedValues.payment_currency || currency || 'USD'),
           status: 'pending',
           gateway_response: {
             customer_data: {
@@ -293,7 +293,7 @@ export default function ModernPaymentForm({
       // Notify parent that payment is being initiated
       await onPaymentInitiated({
         amount: conversionInfo?.convertedAmount || amount,
-        currency: conversionInfo ? 'KES' : (watchedValues.payment_currency || currency),
+        currency: conversionInfo ? 'KES' : (watchedValues.payment_currency || currency || 'USD'),
         paymentMethod: data.payment_gateway,
         reference: paymentReference
       })
@@ -659,7 +659,7 @@ export default function ModernPaymentForm({
                     <CreditCard className="h-4 w-4 mr-2" />
                     Pay {conversionInfo ? 
                       CurrencyService.formatCurrency(conversionInfo.convertedAmount, 'KES') :
-                      CurrencyService.formatCurrency(amount, watchedValues.payment_currency || currency)
+                      CurrencyService.formatCurrency(amount, watchedValues.payment_currency || currency || 'USD')
                     }
                   </>
                 )}

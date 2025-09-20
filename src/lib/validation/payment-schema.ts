@@ -49,8 +49,7 @@ export const paymentFormSchema = z.object({
   // Currency Selection
   payment_currency: z
     .string()
-    .length(3, "Please select a valid currency")
-    .default("USD"),
+    .length(3, "Please select a valid currency"),
 
   // Terms and Conditions
   accept_terms: z
