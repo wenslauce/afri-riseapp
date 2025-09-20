@@ -2,7 +2,7 @@ import { requireAuth } from '@/lib/auth'
 import { getApplicationById, getUserProfile, getNDASignatureByApplicationId } from '@/lib/database'
 import { notFound } from 'next/navigation'
 import SignatureVerification from '@/components/nda/SignatureVerification'
-import Link from 'next/link'
+import CompletePageActions from '@/components/application/CompletePageActions'
 
 interface CompletePageProps {
   params: Promise<{
@@ -141,21 +141,7 @@ export default async function CompletePage({ params }: CompletePageProps) {
             <SignatureVerification signature={ndaSignature} />
 
             {/* Action Buttons */}
-            <div className="flex justify-center space-x-4 pt-6 border-t border-gray-200">
-              <Link
-                href="/dashboard"
-                className="btn-primary"
-              >
-                Go to Dashboard
-              </Link>
-              
-              <button
-                onClick={() => window.print()}
-                className="btn-secondary"
-              >
-                Print Summary
-              </button>
-            </div>
+            <CompletePageActions />
           </div>
         </div>
       </div>
