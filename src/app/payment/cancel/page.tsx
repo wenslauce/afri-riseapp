@@ -1,12 +1,13 @@
 'use client'
 
+import { Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Alert, AlertDescription } from '@/components/ui/alert'
-import { XCircle, ArrowLeft, CreditCard } from 'lucide-react'
+import { XCircle, ArrowLeft, CreditCard, Loader2 } from 'lucide-react'
 
-export default function PaymentCancelPage() {
+function PaymentCancelContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
 
@@ -86,5 +87,31 @@ export default function PaymentCancelPage() {
         </Card>
       </div>
     </div>
+  )
+}
+
+export default function PaymentCancelPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 p-4">
+        <div className="max-w-md w-full">
+          <Card className="text-center border-orange-200 bg-orange-50 dark:bg-orange-950/20">
+            <CardHeader className="pb-4">
+              <div className="flex justify-center mb-4">
+                <Loader2 className="h-16 w-16 animate-spin text-orange-500" />
+              </div>
+              <CardTitle className="text-2xl text-orange-900 dark:text-orange-100">
+                Loading...
+              </CardTitle>
+              <CardDescription className="text-lg text-orange-700 dark:text-orange-300">
+                Processing payment cancellation...
+              </CardDescription>
+            </CardHeader>
+          </Card>
+        </div>
+      </div>
+    }>
+      <PaymentCancelContent />
+    </Suspense>
   )
 }
