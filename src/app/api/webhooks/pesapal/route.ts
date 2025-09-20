@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { paymentService } from '@/lib/payments/PaymentService'
 import { updatePaymentRecordByReference } from '@/lib/database-client'
+import { updateApplicationStatusOnPayment } from '@/lib/application-status-updater'
 
 export async function POST(request: NextRequest) {
   try {
@@ -50,6 +51,15 @@ export async function POST(request: NextRequest) {
           }
         })
         console.log(`Payment record updated for transaction ${webhookResult.transactionId}:`, webhookResult.status)
+        
+        // Update application status if payment is completed
+        if (webhookResult.status === 'completed') {
+          // Extract application ID from the transaction ID (format: APP-{applicationId}-{timestamp})
+          const applicationId = webhookResult.transactionId.split('-')[1]
+          if (applicationId) {
+            await updateApplicationStatusOnPayment(applicationId)
+          }
+        }
       } catch (dbError) {
         console.error('Failed to update payment record:', dbError)
         // Don't return error to Pesapal - the webhook was processed successfully
@@ -101,6 +111,15 @@ export async function GET(request: NextRequest) {
             webhook_processed_at: new Date().toISOString()
           }
         })
+        
+        // Update application status if payment is completed
+        if (webhookResult.status === 'completed') {
+          // Extract application ID from the transaction ID (format: APP-{applicationId}-{timestamp})
+          const applicationId = webhookResult.transactionId.split('-')[1]
+          if (applicationId) {
+            await updateApplicationStatusOnPayment(applicationId)
+          }
+        }
       } catch (dbError) {
         console.error('Failed to update payment record:', dbError)
       }

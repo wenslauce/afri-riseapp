@@ -295,5 +295,25 @@ export async function createNDASignature(signature: Omit<NDASignature, 'id' | 's
     throw new Error(`Failed to create NDA signature: ${error.message}`)
   }
 
+  // Update application status after NDA is signed
+  try {
+    const response = await fetch('/api/applications/update-status', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        applicationId: signature.application_id,
+        trigger: 'nda_signed'
+      })
+    })
+    
+    if (!response.ok) {
+      console.warn('Failed to update application status after NDA signing')
+    }
+  } catch (error) {
+    console.warn('Error updating application status after NDA signing:', error)
+  }
+
   return data
 }

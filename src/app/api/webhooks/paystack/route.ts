@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { paymentService } from '@/lib/payments/PaymentService'
 import { updatePaymentRecordByReference } from '@/lib/database-client'
+import { updateApplicationStatusOnPayment } from '@/lib/application-status-updater'
 
 export async function POST(request: NextRequest) {
   try {
@@ -20,6 +21,15 @@ export async function POST(request: NextRequest) {
           gateway_response: payload
         })
         console.log('Payment record updated successfully')
+        
+        // Update application status if payment is completed
+        if (result.status === 'completed') {
+          // Extract application ID from the transaction ID (format: APP-{applicationId}-{timestamp})
+          const applicationId = result.transactionId.split('-')[1]
+          if (applicationId) {
+            await updateApplicationStatusOnPayment(applicationId)
+          }
+        }
       } catch (error) {
         console.error('Failed to update payment record:', error)
         // Don't fail the webhook if database update fails
