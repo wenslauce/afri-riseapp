@@ -349,10 +349,14 @@ export async function getNDASignatureByApplicationId(applicationId: string): Pro
 export async function getPaymentsByUserId(userId: string): Promise<PaymentRecord[]> {
   const supabase = await createClient()
   
+  // Get payments through applications
   const { data, error } = await supabase
     .from('payment_records')
-    .select('*')
-    .eq('application_id', userId) // This should join with applications table
+    .select(`
+      *,
+      applications!inner(user_id)
+    `)
+    .eq('applications.user_id', userId)
     .order('created_at', { ascending: false })
   
   if (error) {

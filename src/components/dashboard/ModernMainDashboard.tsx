@@ -115,6 +115,21 @@ export default function ModernMainDashboard({
     const completedSteps = steps.filter(step => step.completed).length
     const progressPercentage = (completedSteps / steps.length) * 100
 
+    // Debug logging for the specific application
+    if (application.id === '85abaed3-79d9-4f12-a2d7-562c2d71b461') {
+      console.log('Progress calculation for application 85abaed3:', {
+        applicationId: application.id,
+        applicationStatus: application.status,
+        appDocuments: appDocuments.length,
+        appPayments: appPayments.length,
+        completedPayment: !!completedPayment,
+        appSignature: !!appSignature,
+        steps: steps.map(s => ({ name: s.name, completed: s.completed })),
+        completedSteps,
+        progressPercentage
+      })
+    }
+
     return { steps, completedSteps, totalSteps: steps.length, progressPercentage }
   }
 
