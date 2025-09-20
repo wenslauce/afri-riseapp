@@ -91,7 +91,7 @@ export default function ModernPaymentForm({
       email: userProfile?.email || '',
       phone: userProfile?.phone || '',
       address: userProfile?.official_address || '',
-      city: userProfile?.city || '',
+      city: '', // City not available in UserProfile, will be filled by user
       country_code: 'KE', // Default to Kenya since business is Kenya-based
       payment_gateway: 'paystack',
       payment_currency: currency || 'USD',
