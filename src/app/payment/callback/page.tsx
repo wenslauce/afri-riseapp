@@ -1,13 +1,13 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { CheckCircle, XCircle, Loader2, CreditCard } from 'lucide-react'
 
-export default function PaymentCallbackPage() {
+function PaymentCallbackContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const [status, setStatus] = useState<'loading' | 'success' | 'failed' | 'cancelled'>('loading')
@@ -167,5 +167,29 @@ export default function PaymentCallbackPage() {
         </Card>
       </div>
     </div>
+  )
+}
+
+export default function PaymentCallbackPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 p-4">
+        <div className="max-w-md w-full">
+          <Card className="text-center border-blue-200 bg-blue-50">
+            <CardHeader className="pb-4">
+              <div className="flex justify-center mb-4">
+                <Loader2 className="h-16 w-16 animate-spin text-blue-500" />
+              </div>
+              <CardTitle className="text-2xl">Loading...</CardTitle>
+              <CardDescription className="text-lg">
+                Processing payment callback...
+              </CardDescription>
+            </CardHeader>
+          </Card>
+        </div>
+      </div>
+    }>
+      <PaymentCallbackContent />
+    </Suspense>
   )
 }
