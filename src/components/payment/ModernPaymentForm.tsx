@@ -237,10 +237,6 @@ export default function ModernPaymentForm({
     onClose: () => {
       setIsSubmitting(false)
       // Payment was cancelled by user
-    },
-    config: {
-      currency: currency,
-      channels: ['card', 'bank', 'ussd', 'qr', 'mobile_money', 'bank_transfer'],
     }
   })
 
